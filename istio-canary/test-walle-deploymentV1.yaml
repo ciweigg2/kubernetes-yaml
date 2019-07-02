@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-walle-v1
+  labels:
+    app: test-walle
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-walle
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: test-walle
+        version: v1
+    spec:
+      serviceAccountName: walle-account
+      containers:
+      - name: test-walle
+        image: demo:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8081
